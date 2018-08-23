@@ -6,20 +6,43 @@
  * Time: 13:41
  */
 
+include SERVICE_PATH.'UserServices.php';
+
 class Sample
 {
-    public function index()
-    {
+    function __construct() {
+        //
+    }
+
+    function index() {
         $data = array(
-            'title' => 'Sample Page'
+            'title' => 'Sample'
         );
 
         $view = new Template();
-        print $view->render('sample', $data);
+        $view->render('sample/index', $data);
     }
 
-    public function foo($bar)
-    {
-        echo "Hello, this is Foo method with argument $bar";
+    function foo($p1, $p2) {
+        $data = array(
+            'title'     => 'Sample With Param',
+            'param1'    => $p1,
+            'param2'    => $p2
+        );
+
+        $view = new Template();
+        $view->render('sample/param', $data);
+    }
+
+    function data() {
+        $service = new UserServices();
+
+        $data = array(
+            'title'     => 'Sample connect to DB',
+            'users'  => $service->get_list()
+        );
+
+        $view = new Template();
+        $view->render('sample/data', $data);
     }
 }

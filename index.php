@@ -8,21 +8,26 @@
 
 /*
  * ----------------------------------------------------------
- * LOAD COMPONENT
- * ----------------------------------------------------------
- */
-    include 'system/libraries/Template.php';
-    include 'system/libraries/Database.php';
-    include 'system/libraries/Config.php';
-
-/*
- * ----------------------------------------------------------
  * DEFINE CONSTANT
  * ----------------------------------------------------------
  */
     define('FCPATH', dirname(__FILE__).DIRECTORY_SEPARATOR);
     define('VIEWPATH', 'WEB-INF/template'.DIRECTORY_SEPARATOR);
-    define('LIBPATH', 'system/libraries'.DIRECTORY_SEPARATOR);
+    define('LIBRARY_PATH', 'system/libraries'.DIRECTORY_SEPARATOR);
+    define('CONTROLLER_PATH', 'system/controllers'.DIRECTORY_SEPARATOR);
+    define('MODEL_PATH', 'system/models'.DIRECTORY_SEPARATOR);
+    define('SERVICE_PATH', 'system/services'.DIRECTORY_SEPARATOR);
+
+
+/*
+* ----------------------------------------------------------
+* LOAD COMPONENT
+* ----------------------------------------------------------
+*/
+    include LIBRARY_PATH.'Template.php';
+    include LIBRARY_PATH.'Database.php';
+    include LIBRARY_PATH.'Config.php';
+
 
 /*
  * ----------------------------------------------------------

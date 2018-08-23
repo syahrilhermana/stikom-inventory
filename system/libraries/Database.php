@@ -12,7 +12,7 @@ class Database
     static $_instance;
 
     private function __construct() {
-        $this->_db = new PDO('mysqli:host=localhost;dbname=inventory', 'root', 'admin');
+        $this->_db = new PDO('mysql:host=localhost;dbname=inventory', 'root', 'admin');
         $this->_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 

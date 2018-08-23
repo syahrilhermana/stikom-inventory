@@ -8,7 +8,7 @@
 
 include '../libraries/Template.php';
 
-class Controller
+abstract class Controller
 {
     private $path;
     private $view;

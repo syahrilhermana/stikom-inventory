@@ -6,8 +6,7 @@
  * Time: 10:32
  */
 
-include '../libraries/Database.php';
-include '../models/User.php';
+include MODEL_PATH.'User.php';
 
 class UserServices
 {
@@ -17,8 +16,13 @@ class UserServices
         $this->_table = 'tbl_user';
     }
 
-    public function get() {
-        //
+    public function get_list() {
+        $db = Database::getInstance();
+        $statement = 'select * from tbl_user';
+
+        if ($result = $db->query($statement)) {
+            return $result->fetchAll(PDO::FETCH_CLASS, User::class);
+        }
     }
 
     public function login(User $user) {

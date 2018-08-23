@@ -9,25 +9,26 @@
 
 Class Bootstrap
 {
-    private $path;
-    private $class;
+    private $callback;
     private $method;
-    private $args = array();
+    private $instance = array();
 
     function __construct() {
-        $this->path = 'system/controllers'.DIRECTORY_SEPARATOR;
+        //
     }
 
     function run() {
         $uri = $_SERVER['PATH_INFO'];
         $segment = explode('/', $uri);
-        $options = array();
+        $instance = array();
 
         if(count($segment) < 2) {
-            // error
+            // set default controller
+            $this->callback = ucfirst('Auth');
+            $this->method = 'index';
         } else {
             if(count($segment) >= 2) {
-                $this->class = ucfirst($segment[1]);
+                $this->callback = ucfirst($segment[1]);
                 $this->method = 'index';
             }
 
@@ -36,25 +37,41 @@ Class Bootstrap
             }
 
             if(count($segment) >= 4) {
-                for($i=0; $i<=(count($segment)-4); $i++) {
-                    $options[$i] = $segment[$i+4];
+                for($i=0; $i<=(count($segment)-3); $i++) {
+                    $instance[$i] = $segment[$i+3];
                 }
             }
         }
 
-        // start reflection
-        require_once $this->path.$this->class.'.php';
-        $reflection = new ReflectionMethod($this->class, $this->method);
-        for($i=0; $i<=(count($reflection->getParameters())-1); $i++) {
-            $this->args[$i] = false;
-            if($i <= (count($reflection->getParameters())-1))
-                $this->args[$i] = $options[$i];
+        try{
+            // start reflection
+            require_once CONTROLLER_PATH.$this->callback.'.php';
+
+            $reflector = new ReflectionMethod($this->callback, $this->method);
+            for($i=0; $i<=(count($reflector->getParameters())-1); $i++) {
+                $this->instance[$i] = false;
+                if($i <= (count($reflector->getParameters())-1))
+                    $this->instance[$i] = $instance[$i];
+            }
+
+            // run away
+            echo call_user_func_array(array($this->callback, $this->method), $this->instance);
+        }catch (Exception $e){
+            echo $e->getMessage();
+        }catch (Error $e){
+            echo $e->getMessage();
         }
 
-        // run away
-        echo call_user_func_array(array($this->class, $this->method), $this->args);
     }
 }
 
-$app = new Bootstrap();
-$app->run();
+
+/*
+ * ----------------------------------------------------------
+ * RETURN THE APPLICATION
+ * ----------------------------------------------------------
+ *
+ * This script return the application instance.
+ */
+    $app = new Bootstrap();
+    $app->run();
