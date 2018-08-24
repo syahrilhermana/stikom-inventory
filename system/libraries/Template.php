@@ -15,15 +15,13 @@ class Template
      */
     private $folder;
     private $template;
-    private $path;
     /**
      * Template constructor.
      *
      */
     function __construct(){
-        $this->path = 'WEB-INF/views'.DIRECTORY_SEPARATOR;
         $this->template = 'default.php';
-        $this->set_folder( $this->path );
+        $this->set_folder( VIEW_PATH );
     }
     /**
      * Simple method for updating the base folder where templates are located.
@@ -98,7 +96,7 @@ class Template
             ${$key} = $value;
         }
 
-        include $this->path.$this->template;
+        include VIEW_PATH.$this->template;
 
         return ob_get_clean();
     }

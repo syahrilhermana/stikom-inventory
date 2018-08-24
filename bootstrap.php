@@ -14,7 +14,8 @@ Class Bootstrap
     private $instance = array();
 
     function __construct() {
-        //
+        $this->method = 'index';
+        error_reporting(3);
     }
 
     function run() {
@@ -25,11 +26,9 @@ Class Bootstrap
         if(count($segment) < 2) {
             // set default controller
             $this->callback = ucfirst('Auth');
-            $this->method = 'index';
         } else {
             if(count($segment) >= 2) {
                 $this->callback = ucfirst($segment[1]);
-                $this->method = 'index';
             }
 
             if(count($segment) >= 3) {
@@ -37,7 +36,7 @@ Class Bootstrap
             }
 
             if(count($segment) >= 4) {
-                for($i=0; $i<=(count($segment)-3); $i++) {
+                for($i=0; $i<=(count($segment)-4); $i++) {
                     $instance[$i] = $segment[$i+3];
                 }
             }
@@ -55,7 +54,7 @@ Class Bootstrap
             }
 
             // run away
-            echo call_user_func_array(array($this->callback, $this->method), $this->instance);
+            echo (count($this->instance) === 0) ? call_user_func(array($this->callback, $this->method)) : call_user_func_array(array($this->callback, $this->method), $this->instance);
         }catch (Exception $e){
             echo $e->getMessage();
         }catch (Error $e){

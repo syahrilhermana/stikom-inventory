@@ -6,8 +6,6 @@
  * Time: 10:32
  */
 
-include '../libraries/Database.php';
-
 class User
 {
     public $id;

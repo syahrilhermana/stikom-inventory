@@ -157,7 +157,7 @@ $config = new Config();
                         <li class="menu-title">Navigation</li>
                         <li>
                             <a href="index.html">
-                                <i class="fi-air-play"></i><span> Permintaan Barang </span>
+                                <i class="fi-air-play"></i><span> Request </span>
                             </a>
                         </li>
                     </ul>

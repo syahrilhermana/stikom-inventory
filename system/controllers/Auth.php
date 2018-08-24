@@ -15,7 +15,7 @@ class Auth
             header('Location: '.$config->base_url().'main');
             die();
         } else {
-            header('Location: '.$config->base_url().'authentication/login');
+            header('Location: '.$config->base_url().'auth/login');
             die();
         }
     }

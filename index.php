@@ -12,7 +12,7 @@
  * ----------------------------------------------------------
  */
     define('FCPATH', dirname(__FILE__).DIRECTORY_SEPARATOR);
-    define('VIEWPATH', 'WEB-INF/template'.DIRECTORY_SEPARATOR);
+    define('VIEW_PATH', 'WEB-INF/views'.DIRECTORY_SEPARATOR);
     define('LIBRARY_PATH', 'system/libraries'.DIRECTORY_SEPARATOR);
     define('CONTROLLER_PATH', 'system/controllers'.DIRECTORY_SEPARATOR);
     define('MODEL_PATH', 'system/models'.DIRECTORY_SEPARATOR);
